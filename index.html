@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Purple Case Simulator</title>
-<meta name="description" content="Purple Case Simulator — открывай кейсы, собирай скины и улучшай их.">
 <style>
   :root {
     --purple: #8b5cf6;
@@ -20,508 +19,220 @@
     --red: #f87171;
     --blue: #60a5fa;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Segoe UI', system-ui, sans-serif;
     background: radial-gradient(circle at 50% 0%, #2a1a4d 0%, var(--bg) 60%);
     color: var(--text);
     min-height: 100vh;
-    overflow-x: hidden;
   }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* ===== HEADER ===== */
+  /* HEADER */
   .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(15, 10, 30, 0.85);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,10,30,0.9);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    border-bottom: 1px solid rgba(139,92,246,0.2);
   }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 0;
-    gap: 20px;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--text);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .logo-mark {
-    color: var(--purple-light);
-    font-size: 1.5rem;
-    filter: drop-shadow(0 0 8px var(--purple));
-  }
-
-  .nav nav {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .nav nav a {
-    color: var(--text-dim);
-    text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: 0.2s;
-  }
-
-  .nav nav a:hover {
-    color: var(--text);
-    background: rgba(139, 92, 246, 0.15);
-  }
-
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 20px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+  .logo-mark { color: var(--purple-light); font-size: 1.5rem; }
+  .nav nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav nav a { color: var(--text-dim); text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.9rem; transition: 0.2s; }
+  .nav nav a:hover { color: var(--text); background: rgba(139,92,246,0.15); }
   .balance {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(139, 92, 246, 0.15);
-    border: 1px solid rgba(139, 92, 246, 0.4);
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(139,92,246,0.15);
+    border: 1px solid rgba(139,92,246,0.4);
+    padding: 8px 16px; border-radius: 10px; font-weight: 700;
   }
 
-  /* ===== HERO ===== */
-  .hero {
-    text-align: center;
-    padding: 60px 0 40px;
-  }
-
+  /* HERO */
+  .hero { text-align: center; padding: 50px 0 30px; }
   .badge {
-    display: inline-block;
-    background: rgba(139, 92, 246, 0.15);
-    border: 1px solid var(--purple);
-    color: var(--purple-light);
-    padding: 6px 16px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-    margin-bottom: 20px;
+    display: inline-block; background: rgba(139,92,246,0.15);
+    border: 1px solid var(--purple); color: var(--purple-light);
+    padding: 6px 16px; border-radius: 999px; font-size: 0.75rem;
+    letter-spacing: 2px; font-weight: 700; margin-bottom: 20px;
   }
-
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    line-height: 1.1;
+    font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1;
     background: linear-gradient(135deg, #fff 0%, var(--purple-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 16px;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 16px;
   }
+  .hero p { color: var(--text-dim); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
 
-  .hero p {
-    color: var(--text-dim);
-    font-size: 1.05rem;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  /* ===== SECTIONS ===== */
-  section.block {
-    padding: 40px 0;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
+  /* SECTIONS */
+  section.block { padding: 30px 0; }
+  .section-title { font-size: 1.6rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
   .section-title span { color: var(--purple-light); }
 
-  /* ===== CASES ===== */
+  /* CASES */
   .cases-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
   }
-
   .case-card {
     background: linear-gradient(160deg, var(--bg-card), var(--bg-card2));
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    border: 1px solid rgba(139,92,246,0.25);
     border-radius: 16px;
     padding: 24px;
     text-align: center;
     transition: 0.3s;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
   }
-
-  .case-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(139,92,246,0.25), transparent 70%);
-    opacity: 0;
-    transition: 0.3s;
-  }
-
   .case-card:hover {
     transform: translateY(-6px);
     border-color: var(--purple);
-    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 12px 40px rgba(139,92,246,0.3);
   }
-
-  .case-card:hover::before { opacity: 1; }
-
-  .case-emoji {
-    font-size: 3.5rem;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 0 12px rgba(139,92,246,0.6));
-  }
-
-  .case-name {
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 4px;
-  }
-
-  .case-price {
-    color: var(--gold);
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-
+  .case-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+  .case-name { font-weight: 700; font-size: 1.15rem; margin-bottom: 4px; }
+  .case-price { color: var(--gold); font-weight: 700; margin-bottom: 16px; }
   .btn {
     background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-    color: #fff;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: 0.2s;
-    width: 100%;
-    font-family: inherit;
+    color: #fff; border: none; padding: 10px 24px;
+    border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; transition: 0.2s; width: 100%; font-family: inherit;
   }
+  .btn:hover:not(:disabled) { transform: scale(1.03); box-shadow: 0 8px 24px rgba(139,92,246,0.5); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .btn:hover:not(:disabled) {
-    transform: scale(1.03);
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.5);
-  }
-
-  .btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-
-  /* ===== ROULETTE ===== */
+  /* ROULETTE */
   .roulette-wrap {
     position: relative;
     background: var(--bg-card);
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    border: 1px solid rgba(139,92,246,0.25);
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 24px;
     overflow: hidden;
   }
-
   .roulette-pointer {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
     border-top: 20px solid var(--gold);
     z-index: 10;
-    filter: drop-shadow(0 0 6px var(--gold));
   }
-
-  .roulette {
-    display: flex;
-    gap: 10px;
-    overflow: hidden;
-  }
-
+  .roulette { display: flex; gap: 10px; }
   .roulette-item {
-    flex: 0 0 120px;
-    height: 120px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-size: 2.4rem;
+    flex: 0 0 120px; height: 120px; border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 6px; font-size: 2.4rem;
     border: 2px solid rgba(255,255,255,0.08);
     background: var(--bg-card2);
-    position: relative;
   }
+  .roulette-item small { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-  .roulette-item small {
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* ===== INVENTORY ===== */
+  /* INVENTORY */
   .inventory-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 12px;
   }
-
   .inv-item {
-    background: var(--bg-card);
-    border: 2px solid;
-    border-radius: 12px;
-    padding: 14px 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.2s;
-    position: relative;
+    background: var(--bg-card); border: 2px solid;
+    border-radius: 12px; padding: 14px 8px;
+    text-align: center; cursor: pointer; transition: 0.2s;
   }
-
-  .inv-item:hover {
-    transform: scale(1.05);
-  }
-
-  .inv-item.selected {
-    box-shadow: 0 0 0 3px var(--purple-light), 0 0 20px rgba(139,92,246,0.6);
-  }
-
+  .inv-item:hover { transform: scale(1.05); }
+  .inv-item.selected { box-shadow: 0 0 0 3px var(--purple-light), 0 0 20px rgba(139,92,246,0.6); }
   .inv-emoji { font-size: 2.2rem; margin-bottom: 6px; }
   .inv-name { font-size: 0.8rem; font-weight: 600; }
   .inv-price { font-size: 0.75rem; color: var(--gold); margin-top: 4px; }
+  .empty { text-align: center; color: var(--text-dim); padding: 40px 20px; grid-column: 1 / -1; }
 
-  .empty {
-    text-align: center;
-    color: var(--text-dim);
-    padding: 40px 20px;
-    grid-column: 1 / -1;
-    font-size: 0.95rem;
-  }
-
-  /* ===== UPGRADE ===== */
+  /* UPGRADE */
   .upgrade-panel {
-    background: var(--bg-card);
-    border: 1px solid rgba(139, 92, 246, 0.25);
-    border-radius: 16px;
-    padding: 24px;
+    background: var(--bg-card); border: 1px solid rgba(139,92,246,0.25);
+    border-radius: 16px; padding: 24px;
   }
-
   .upgrade-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 20px;
-    align-items: center;
-    margin-bottom: 24px;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 20px; align-items: center; margin-bottom: 24px;
   }
-
   @media (max-width: 640px) {
     .upgrade-row { grid-template-columns: 1fr; }
     .upgrade-arrow { transform: rotate(90deg); }
   }
-
   .upgrade-slot {
-    background: var(--bg-card2);
-    border: 2px dashed rgba(139,92,246,0.4);
-    border-radius: 14px;
-    padding: 24px;
-    text-align: center;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    background: var(--bg-card2); border: 2px dashed rgba(139,92,246,0.4);
+    border-radius: 14px; padding: 24px; text-align: center;
+    min-height: 150px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
   }
-
-  .upgrade-arrow {
-    font-size: 2rem;
-    color: var(--purple-light);
-    text-align: center;
-  }
-
-  .upgrade-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .upgrade-controls input[type=range] {
-    width: 100%;
-    accent-color: var(--purple);
-  }
-
-  .chance {
-    font-size: 1.5rem;
-    font-weight: 800;
-  }
-
+  .upgrade-arrow { font-size: 2rem; color: var(--purple-light); text-align: center; }
+  .upgrade-controls { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+  .upgrade-controls input[type=range] { width: 100%; accent-color: var(--purple); }
+  .chance { font-size: 1.5rem; font-weight: 800; }
   .chance.high { color: var(--green); }
   .chance.mid { color: var(--gold); }
   .chance.low { color: var(--red); }
 
-  /* ===== HISTORY ===== */
-  .history-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
+  /* HISTORY */
+  .history-list { display: flex; flex-direction: column; gap: 8px; }
   .history-item {
-    background: var(--bg-card);
-    border-left: 4px solid var(--purple);
-    border-radius: 8px;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    font-size: 0.9rem;
-    animation: slideIn 0.3s ease;
+    background: var(--bg-card); border-left: 4px solid var(--purple);
+    border-radius: 8px; padding: 12px 16px;
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 12px; font-size: 0.9rem;
   }
+  .history-item .h-time { color: var(--text-dim); font-size: 0.75rem; white-space: nowrap; }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .history-item .h-time {
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-
-  /* ===== MODAL ===== */
+  /* MODAL */
   .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(6px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px); display: none;
+    align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
   }
-
   .modal-overlay.active { display: flex; }
-
   .modal {
     background: linear-gradient(160deg, var(--bg-card), var(--bg-card2));
-    border: 2px solid var(--purple);
-    border-radius: 20px;
-    padding: 32px;
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 0 60px rgba(139, 92, 246, 0.5);
+    border: 2px solid var(--purple); border-radius: 20px;
+    padding: 32px; text-align: center; max-width: 400px; width: 100%;
+    box-shadow: 0 0 60px rgba(139,92,246,0.5);
   }
-
-  @keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-
-  .modal-emoji {
-    font-size: 5rem;
-    margin-bottom: 12px;
-    animation: bounce 0.6s;
-  }
-
-  @keyframes bounce {
-    0% { transform: scale(0); }
-    60% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-
+  .modal-emoji { font-size: 5rem; margin-bottom: 12px; }
   .modal h3 { font-size: 1.4rem; margin-bottom: 8px; }
   .modal .rarity { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 16px; }
   .modal .price { color: var(--gold); font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
 
-  /* ===== TOAST ===== */
+  /* TOAST */
   .toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
+    position: fixed; bottom: 20px; left: 50%;
     transform: translateX(-50%) translateY(100px);
-    background: var(--bg-card2);
-    border: 1px solid var(--purple);
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 600;
-    z-index: 2000;
-    transition: 0.3s;
-    opacity: 0;
+    background: var(--bg-card2); border: 1px solid var(--purple);
+    padding: 12px 24px; border-radius: 12px;
+    font-weight: 600; z-index: 2000;
+    transition: 0.3s; opacity: 0;
   }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-
-  .footer {
-    text-align: center;
-    padding: 40px 0;
-    color: var(--text-dim);
-    font-size: 0.85rem;
-    border-top: 1px solid rgba(139,92,246,0.15);
-    margin-top: 40px;
-  }
+  .footer { text-align: center; padding: 40px 0; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid rgba(139,92,246,0.15); margin-top: 40px; }
 </style>
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="#" class="logo">
-      <span class="logo-mark">✦</span>
-      Purple Case
-    </a>
-
+    <a href="#" class="logo"><span class="logo-mark">✦</span> Purple Case</a>
     <nav>
       <a href="#cases">Кейсы</a>
       <a href="#inventory">Инвентарь</a>
       <a href="#upgrade">Апгрейд</a>
       <a href="#history">История</a>
     </nav>
-
-    <div class="balance">
-      <span>💜</span>
-      <strong id="balance">1000</strong>
-    </div>
+    <div class="balance"><span>💜</span><strong id="balance">1000</strong></div>
   </div>
 </header>
 
 <main>
-
   <section class="hero">
     <div class="container">
       <div class="badge">PURPLE CASE SIMULATOR</div>
@@ -533,12 +244,10 @@
   <section class="block" id="cases">
     <div class="container">
       <h2 class="section-title"><span>🎁</span> Кейсы</h2>
-
       <div class="roulette-wrap" id="rouletteWrap" style="display:none;">
         <div class="roulette-pointer"></div>
         <div class="roulette" id="roulette"></div>
       </div>
-
       <div class="cases-grid" id="casesGrid"></div>
     </div>
   </section>
@@ -546,9 +255,7 @@
   <section class="block" id="inventory">
     <div class="container">
       <h2 class="section-title"><span>🎒</span> Инвентарь</h2>
-      <p style="color:var(--text-dim); margin-bottom:16px; font-size:0.9rem;">
-        Кликни по предмету, чтобы выбрать его для апгрейда.
-      </p>
+      <p style="color:var(--text-dim); margin-bottom:16px; font-size:0.9rem;">Кликни по предмету, чтобы выбрать его для апгрейда.</p>
       <div class="inventory-grid" id="inventoryGrid"></div>
     </div>
   </section>
@@ -556,31 +263,23 @@
   <section class="block" id="upgrade">
     <div class="container">
       <h2 class="section-title"><span>⚡</span> Апгрейд</h2>
-
       <div class="upgrade-panel">
         <div class="upgrade-row">
           <div class="upgrade-slot" id="slotFrom">
             <div style="color:var(--text-dim); font-size:0.85rem;">Выбери предмет в инвентаре</div>
           </div>
-
           <div class="upgrade-arrow">➜</div>
-
           <div class="upgrade-slot" id="slotTo">
             <div style="color:var(--text-dim); font-size:0.85rem;">Цель апгрейда</div>
           </div>
         </div>
-
         <div class="upgrade-controls">
-          <div>
-            Шанс успеха: <span class="chance high" id="chanceLabel">—</span>
-          </div>
+          <div>Шанс успеха: <span class="chance" id="chanceLabel">—</span></div>
           <input type="range" id="targetSlider" min="1" max="1000" value="200" step="10">
           <div style="color:var(--text-dim); font-size:0.85rem;">
             Целевая стоимость: <strong id="targetValue" style="color:var(--gold);">200</strong> 💜
           </div>
-          <button class="btn" id="upgradeBtn" disabled style="max-width:300px;">
-            Апгрейд
-          </button>
+          <button class="btn" id="upgradeBtn" disabled style="max-width:300px;">Апгрейд</button>
         </div>
       </div>
     </div>
@@ -594,7 +293,6 @@
       </div>
     </div>
   </section>
-
 </main>
 
 <div class="modal-overlay" id="modal">
@@ -610,9 +308,7 @@
 <div class="toast" id="toast"></div>
 
 <footer class="footer">
-  <div class="container">
-    ✦ Purple Case Simulator — демо-игра. Все скины вымышленные.
-  </div>
+  <div class="container">✦ Purple Case Simulator — демо-игра.</div>
 </footer>
 
 <script>
@@ -626,29 +322,21 @@ const RARITIES = {
 };
 
 const ITEMS_POOL = [
-  { emoji: '🔪', name: 'Керамбит' },
-  { emoji: '🗡️', name: 'Клинок' },
-  { emoji: '🔫', name: 'Пистолет' },
-  { emoji: '💣', name: 'Граната' },
-  { emoji: '🛡️', name: 'Щит' },
-  { emoji: '⛏️', name: 'Кирка' },
-  { emoji: '🪓', name: 'Топор' },
-  { emoji: '🏹', name: 'Лук' },
-  { emoji: '🧨', name: 'Петарда' },
-  { emoji: '⚔️', name: 'Меч' },
-  { emoji: '🪃', name: 'Бумеранг' },
-  { emoji: '🥊', name: 'Перчатки' },
-  { emoji: '👑', name: 'Корона' },
-  { emoji: '💎', name: 'Алмаз' },
-  { emoji: '🧿', name: 'Амулет' },
-  { emoji: '🔮', name: 'Шар' },
+  { emoji: '🔪', name: 'Керамбит' }, { emoji: '🗡️', name: 'Клинок' },
+  { emoji: '🔫', name: 'Пистолет' }, { emoji: '💣', name: 'Граната' },
+  { emoji: '🛡️', name: 'Щит' }, { emoji: '⛏️', name: 'Кирка' },
+  { emoji: '🪓', name: 'Топор' }, { emoji: '🏹', name: 'Лук' },
+  { emoji: '🧨', name: 'Петарда' }, { emoji: '⚔️', name: 'Меч' },
+  { emoji: '🪃', name: 'Бумеранг' }, { emoji: '🥊', name: 'Перчатки' },
+  { emoji: '👑', name: 'Корона' }, { emoji: '💎', name: 'Алмаз' },
+  { emoji: '🧿', name: 'Амулет' }, { emoji: '🔮', name: 'Шар' },
 ];
 
 const CASES = [
-  { id: 'basic',   emoji: '📦', name: 'Обычный кейс',      price: 100,  maxRarity: 'uncommon' },
-  { id: 'silver',  emoji: '🎁', name: 'Серебряный кейс',   price: 250,  maxRarity: 'rare' },
-  { id: 'gold',    emoji: '🏆', name: 'Золотой кейс',      price: 500,  maxRarity: 'epic' },
-  { id: 'purple',  emoji: '💜', name: 'Purple Case',       price: 1000, maxRarity: 'legendary' },
+  { id: 'basic',  emoji: '📦', name: 'Обычный кейс',    price: 100,  maxRarity: 'uncommon' },
+  { id: 'silver', emoji: '🎁', name: 'Серебряный кейс', price: 250,  maxRarity: 'rare' },
+  { id: 'gold',   emoji: '🏆', name: 'Золотой кейс',    price: 500,  maxRarity: 'epic' },
+  { id: 'purple', emoji: '💜', name: 'Purple Case',     price: 1000, maxRarity: 'legendary' },
 ];
 
 /* ========== СОСТОЯНИЕ ========== */
@@ -661,7 +349,7 @@ let state = {
 };
 
 /* ========== УТИЛИТЫ ========== */
-const $ = (sel) => document.querySelector(sel);
+function $(sel) { return document.querySelector(sel); }
 
 function raritiesUpTo(max) {
   const order = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
@@ -684,36 +372,36 @@ function makeItem(rarity, basePrice) {
   const pool = ITEMS_POOL[Math.floor(Math.random() * ITEMS_POOL.length)];
   const [minM, maxM] = RARITIES[rarity].mult;
   const mult = minM + Math.random() * (maxM - minM);
-  const price = Math.round(basePrice * mult * 10) / 10;
+  const price = Math.round(basePrice * mult);
   return {
     id: 'item_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
-    emoji: pool.emoji,
-    name: pool.name,
-    rarity,
-    price: Math.round(price),
+    emoji: pool.emoji, name: pool.name, rarity, price,
   };
 }
 
 function weightedRandomCase(caseObj) {
-  const rarity = rollRarity(caseObj.maxRarity);
-  return makeItem(rarity, caseObj.price / 8);
+  return makeItem(rollRarity(caseObj.maxRarity), caseObj.price / 8);
 }
 
 function updateBalance() {
-  $('#balance').textContent = Math.round(state.balance);
+  document.getElementById('balance').textContent = Math.round(state.balance);
 }
 
 function showToast(text) {
-  const t = $('#toast');
+  const t = document.getElementById('toast');
   t.textContent = text;
   t.classList.add('show');
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
+function nowTime() {
+  return new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+}
+
 /* ========== РЕНДЕР ========== */
 function renderCases() {
-  const grid = $('#casesGrid');
+  const grid = document.getElementById('casesGrid');
   grid.innerHTML = '';
   CASES.forEach(c => {
     const card = document.createElement('div');
@@ -722,18 +410,21 @@ function renderCases() {
       <div class="case-emoji">${c.emoji}</div>
       <div class="case-name">${c.name}</div>
       <div class="case-price">${c.price} 💜</div>
-      <button class="btn" ${state.balance < c.price ? 'disabled' : ''}>Открыть</button>
+      <button class="btn" type="button">Открыть</button>
     `;
-    card.querySelector('button').addEventListener('click', (e) => {
+    const handler = (e) => {
+      e.preventDefault();
       e.stopPropagation();
       openCase(c);
-    });
+    };
+    card.addEventListener('click', handler);
+    card.querySelector('button').addEventListener('click', handler);
     grid.appendChild(card);
   });
 }
 
 function renderInventory() {
-  const grid = $('#inventoryGrid');
+  const grid = document.getElementById('inventoryGrid');
   grid.innerHTML = '';
   if (state.inventory.length === 0) {
     grid.innerHTML = '<div class="empty">Инвентарь пуст. Открой кейс!</div>';
@@ -744,7 +435,6 @@ function renderInventory() {
     const el = document.createElement('div');
     el.className = 'inv-item' + (state.selectedItemId === item.id ? ' selected' : '');
     el.style.borderColor = r.color;
-    el.style.boxShadow = `inset 0 0 20px ${r.color}22`;
     el.innerHTML = `
       <div class="inv-emoji">${item.emoji}</div>
       <div class="inv-name">${item.name}</div>
@@ -756,7 +446,7 @@ function renderInventory() {
 }
 
 function renderHistory() {
-  const list = $('#historyList');
+  const list = document.getElementById('historyList');
   if (state.history.length === 0) {
     list.innerHTML = '<div class="empty">Пока пусто. Открой первый кейс!</div>';
     return;
@@ -765,29 +455,22 @@ function renderHistory() {
   state.history.slice(0, 20).forEach(h => {
     const el = document.createElement('div');
     el.className = 'history-item';
-    const color = h.type === 'upgrade_win' ? '#34d399'
-              : h.type === 'upgrade_lose' ? '#f87171'
-              : RARITIES[h.rarity]?.color || '#8b5cf6';
-    el.style.borderLeftColor = color;
-    el.innerHTML = `
-      <div>${h.text}</div>
-      <div class="h-time">${h.time}</div>
-    `;
+    el.style.borderLeftColor = h.color || '#8b5cf6';
+    el.innerHTML = `<div>${h.text}</div><div class="h-time">${h.time}</div>`;
     list.appendChild(el);
   });
 }
 
 function renderUpgrade() {
-  const fromSlot = $('#slotFrom');
-  const toSlot = $('#slotTo');
-  const btn = $('#upgradeBtn');
-  const chanceLabel = $('#chanceLabel');
-  const slider = $('#targetSlider');
-  const targetValue = $('#targetValue');
+  const fromSlot = document.getElementById('slotFrom');
+  const toSlot = document.getElementById('slotTo');
+  const btn = document.getElementById('upgradeBtn');
+  const chanceLabel = document.getElementById('chanceLabel');
+  const slider = document.getElementById('targetSlider');
+  const targetValue = document.getElementById('targetValue');
 
   const item = state.inventory.find(i => i.id === state.selectedItemId);
 
-  // левый слот
   if (item) {
     const r = RARITIES[item.rarity];
     fromSlot.innerHTML = `
@@ -799,28 +482,24 @@ function renderUpgrade() {
     fromSlot.style.borderStyle = 'solid';
     fromSlot.style.borderColor = r.color;
 
-    // настройка слайдера
     const minTarget = item.price + 10;
     const maxTarget = Math.max(minTarget + 100, item.price * 15);
     slider.min = minTarget;
-    slider.max = Math.max(maxTarget, minTarget + 100);
+    slider.max = maxTarget;
     if (+slider.value < minTarget) slider.value = minTarget;
-    if (+slider.value > slider.max) slider.value = slider.max;
+    if (+slider.value > maxTarget) slider.value = maxTarget;
 
     const target = +slider.value;
     targetValue.textContent = Math.round(target);
 
-    // шанс = цена предмета / целевая цена
     let chance = (item.price / target) * 100;
     chance = Math.max(1, Math.min(95, chance));
     chanceLabel.textContent = chance.toFixed(1) + '%';
     chanceLabel.className = 'chance ' + (chance > 50 ? 'high' : chance > 20 ? 'mid' : 'low');
 
-    // правый слот (превью)
     const previewRarity = target > item.price * 8 ? 'legendary'
                         : target > item.price * 4 ? 'epic'
-                        : target > item.price * 2 ? 'rare'
-                        : 'uncommon';
+                        : target > item.price * 2 ? 'rare' : 'uncommon';
     const pr = RARITIES[previewRarity];
     toSlot.innerHTML = `
       <div style="font-size:2.6rem;">❓</div>
@@ -845,6 +524,7 @@ function renderUpgrade() {
     chanceLabel.textContent = '—';
     chanceLabel.className = 'chance';
     btn.disabled = true;
+    btn._item = null;
   }
 }
 
@@ -864,88 +544,87 @@ function openCase(caseObj) {
 
   state.balance -= caseObj.price;
   updateBalance();
-  renderCases();
 
-  // генерируем 30 предметов для рулетки, победный — 25-й
   const winner = weightedRandomCase(caseObj);
-  const WIN_INDEX = 24;
-  const rouletteItems = [];
-  for (let i = 0; i < 30; i++) {
-    rouletteItems.push(i === WIN_INDEX ? winner : weightedRandomCase(caseObj));
-  }
 
   state.isSpinning = true;
-  const wrap = $('#rouletteWrap');
-  const roulette = $('#roulette');
-  wrap.style.display = 'block';
+
+  const wrap = document.getElementById('rouletteWrap');
+  const roulette = document.getElementById('roulette');
+
+  // генерируем ленту
+  const WIN_INDEX = 24;
+  const items = [];
+  for (let i = 0; i < 30; i++) {
+    items.push(i === WIN_INDEX ? winner : weightedRandomCase(caseObj));
+  }
+
   roulette.innerHTML = '';
   roulette.style.transition = 'none';
   roulette.style.transform = 'translateX(0)';
 
-  rouletteItems.forEach(it => {
+  items.forEach(it => {
+    const r = RARITIES[it.rarity];
     const el = document.createElement('div');
     el.className = 'roulette-item';
-    const r = RARITIES[it.rarity];
     el.style.borderColor = r.color;
-    el.style.boxShadow = `inset 0 0 30px ${r.color}33`;
     el.innerHTML = `${it.emoji}<small style="color:${r.color}">${r.name}</small>`;
     roulette.appendChild(el);
   });
 
-  // прокрутка: сдвигаем так, чтобы WIN_INDEX оказался по центру (pointer на 50%)
+  // показываем блок ПЕРЕД измерением ширины
+  wrap.style.display = 'block';
+
+  // двойной rAF гарантирует, что браузер уже отрисовал блок
   requestAnimationFrame(() => {
-    const itemW = 130; // 120 + gap 10
-    const containerW = roulette.parentElement.clientWidth;
-    const targetX = -(WIN_INDEX * itemW + itemW / 2 - containerW / 2);
-    const jitter = (Math.random() - 0.5) * 60;
-    const finalX = targetX + jitter;
+    requestAnimationFrame(() => {
+      const itemW = 130; // 120 ширина + 10 gap
+      const containerW = wrap.clientWidth || window.innerWidth;
+      const targetX = -(WIN_INDEX * itemW + itemW / 2 - containerW / 2);
+      const jitter = (Math.random() - 0.5) * 60;
+      const finalX = targetX + jitter;
 
-    roulette.style.transition = 'transform 5s cubic-bezier(0.15, 0.85, 0.25, 1)';
-    roulette.style.transform = `translateX(${finalX}px)`;
+      roulette.style.transition = 'transform 5s cubic-bezier(0.15, 0.85, 0.25, 1)';
+      roulette.style.transform = `translateX(${finalX}px)`;
 
-    setTimeout(() => {
-      state.isSpinning = false;
-      state.inventory.push(winner);
-      state.history.unshift({
-        text: `Открыт ${caseObj.name}: ${winner.emoji} ${winner.name} (${RARITIES[winner.rarity].name})`,
-        type: 'case',
-        rarity: winner.rarity,
-        time: new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'}),
-      });
-      renderInventory();
-      renderHistory();
-      showWinModal(winner);
-      wrap.style.display = 'none';
-      renderCases();
-    }, 5200);
+      setTimeout(() => {
+        state.isSpinning = false;
+        state.inventory.push(winner);
+        state.history.unshift({
+          text: `Открыт ${caseObj.name}: ${winner.emoji} ${winner.name} (${RARITIES[winner.rarity].name})`,
+          color: RARITIES[winner.rarity].color,
+          time: nowTime(),
+        });
+        renderInventory();
+        renderHistory();
+        renderCases();
+        showWinModal(winner);
+        wrap.style.display = 'none';
+      }, 5200);
+    });
   });
 }
 
 function showWinModal(item) {
   const r = RARITIES[item.rarity];
-  $('#modalEmoji').textContent = item.emoji;
-  $('#modalName').textContent = item.name;
-  $('#modalRarity').textContent = r.name;
-  $('#modalRarity').style.color = r.color;
-  $('#modalPrice').textContent = item.price + ' 💜';
-  $('#modal').classList.add('active');
+  document.getElementById('modalEmoji').textContent = item.emoji;
+  document.getElementById('modalName').textContent = item.name;
+  const rar = document.getElementById('modalRarity');
+  rar.textContent = r.name;
+  rar.style.color = r.color;
+  document.getElementById('modalPrice').textContent = item.price + ' 💜';
+  document.getElementById('modal').classList.add('active');
 }
 
 function doUpgrade() {
-  const btn = $('#upgradeBtn');
+  const btn = document.getElementById('upgradeBtn');
   const item = btn._item;
   const target = btn._target;
   const chance = btn._chance;
-
   if (!item) return;
-
-  if (chance >= 100) {
-    // мгновенный апгрейд (не должно случаться из-за ограничения 95)
-  }
 
   const success = Math.random() * 100 < chance;
 
-  // убираем предмет из инвентаря
   state.inventory = state.inventory.filter(i => i.id !== item.id);
   state.selectedItemId = null;
 
@@ -953,24 +632,23 @@ function doUpgrade() {
     const newItem = makeItem(
       target > item.price * 8 ? 'legendary'
       : target > item.price * 4 ? 'epic'
-      : target > item.price * 2 ? 'rare'
-      : 'uncommon',
+      : target > item.price * 2 ? 'rare' : 'uncommon',
       target / 8
     );
     newItem.price = Math.round(target);
     state.inventory.push(newItem);
     state.history.unshift({
-      text: `✅ Апгрейд удачен: ${item.emoji} ${item.name} → ${newItem.emoji} ${newItem.name} (${newItem.price} 💜)`,
-      type: 'upgrade_win',
-      time: new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'}),
+      text: `✅ Апгрейд: ${item.emoji} ${item.name} → ${newItem.emoji} ${newItem.name} (${newItem.price} 💜)`,
+      color: '#34d399',
+      time: nowTime(),
     });
     showToast('🎉 Апгрейд успешен!');
     showWinModal(newItem);
   } else {
     state.history.unshift({
       text: `❌ Апгрейд провален: ${item.emoji} ${item.name} потерян`,
-      type: 'upgrade_lose',
-      time: new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'}),
+      color: '#f87171',
+      time: nowTime(),
     });
     showToast('💥 Апгрейд провален...');
   }
@@ -981,27 +659,21 @@ function doUpgrade() {
 }
 
 /* ========== СОБЫТИЯ ========== */
-$('#modalBtn').addEventListener('click', () => {
-  $('#modal').classList.remove('active');
+document.getElementById('modalBtn').addEventListener('click', () => {
+  document.getElementById('modal').classList.remove('active');
 });
-
-$('#modal').addEventListener('click', (e) => {
-  if (e.target.id === 'modal') $('#modal').classList.remove('active');
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target.id === 'modal') document.getElementById('modal').classList.remove('active');
 });
+document.getElementById('targetSlider').addEventListener('input', renderUpgrade);
+document.getElementById('upgradeBtn').addEventListener('click', doUpgrade);
 
-$('#targetSlider').addEventListener('input', renderUpgrade);
-$('#upgradeBtn').addEventListener('click', doUpgrade);
-
-/* ========== ИНИЦИАЛИЗАЦИЯ ========== */
-function init() {
-  renderCases();
-  renderInventory();
-  renderHistory();
-  renderUpgrade();
-  updateBalance();
-}
-
-init();
+/* ========== СТАРТ ========== */
+renderCases();
+renderInventory();
+renderHistory();
+renderUpgrade();
+updateBalance();
 </script>
 
 </body>
